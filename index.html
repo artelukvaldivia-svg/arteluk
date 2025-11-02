@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arteluk — Arte y Arteterapia en Valdivia</title>
+<meta name="description" content="Clases de arte y arteterapia para niños, jóvenes y adultos. Pintura, dibujo y talleres personalizados en Valdivia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+/* ====== PALETA / TOKENS ====== */
+:root{
+  --bg:#fff7f1;             /* crema fondo */
+  --panel:#fff;             /* tarjetas */
+  --ink:#222;               /* texto principal */
+  --muted:#5b5b5b;          /* texto suave */
+  --brand:#6a8cff;          /* lavanda-azul (botones/enlaces) */
+  --brand-2:#9ec5ff;        /* celeste suave */
+  --accent:#ff86b3;         /* rosa acento */
+  --stroke:rgba(0,0,0,.08); /* borde sutil */
+  --radius:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ====== RESET ====== */
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ====== NAV ====== */
+nav{
+  position:sticky;top:0;z-index:50;height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 22px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--stroke)
+}
+.brand{font-weight:700;letter-spacing:.2px}
+.brand b{font-family:"Playfair Display",serif;font-weight:600;color:var(--brand)}
+.menu{display:flex;gap:18px}
+.menu a{color:#444}
+.menu a:hover{color:var(--brand)}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;font-weight:700;
+  box-shadow:0 8px 18px rgba(106,140,255,.28);transition:transform .2s, box-shadow .2s, filter .2s
+}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.03)}
+
+/* ====== LAYOUT ====== */
+.section{padding:80px 20px}
+.narrow{max-width:1120px;margin-inline:auto}
+.center{text-align:center}
+
+.h1{
+  font-family:"Playfair Display",serif;font-size:clamp(28px,5vw,56px);line-height:1.08;margin:0 0 10px
+}
+.h2{font-family:"Playfair Display",serif;font-size:clamp(24px,4vw,38px);margin:0 0 8px}
+.lead{color:var(--muted);max-width:820px;margin:0 auto 28px}
+
+/* ====== HERO ====== */
+.hero{
+  position:relative;overflow:hidden;border-bottom:1px solid var(--stroke);
+  background:
+   radial-gradient(1000px 500px at 10% 0%, rgba(158,197,255,.25), transparent 60%),
+   radial-gradient(900px 600px at 100% 40%, rgba(255,134,179,.18), transparent 60%),
+   var(--bg);
+}
+.hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+.hero p{color:#444}
+.hero-fig{
+  aspect-ratio:4/3;border-radius:24px;background:#f5f7ff;
+  border:1px solid var(--stroke);box-shadow:var(--shadow);overflow:hidden;position:relative
+}
+.hero-fig::before{
+  content:"Hero / reemplaza por foto";position:absolute;inset:0;display:grid;place-items:center;
+  color:#7b8ab9;font-weight:600
+}
+
+/* ====== GRID ====== */
+.grid{display:grid;gap:22px}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:960px){
+  .hero-wrap{grid-template-columns:1fr}
+  .cols-2,.cols-3{grid-template-columns:1fr}
+}
+
+/* ====== CARDS ====== */
+.card{
+  background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);transition:transform .25s, box-shadow .25s
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
+.card .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef4ff;color:#355;font-size:.85rem;margin-bottom:8px}
+
+/* ====== LISTA ENFATIZADA ====== */
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#fff;
+  border:1px dashed var(--stroke);color:#555;font-weight:600}
+
+/* ====== FORM ====== */
+.form{
+  background:var(--panel);border:1px solid var(--stroke);border-radius:22px;padding:24px;box-shadow:var(--shadow)
+}
+.input, textarea, select{
+  width:100%;background:#fafafa;border:1px solid var(--stroke);border-radius:12px;padding:12px 14px;
+  font:inherit;margin:0 0 12px;color:#333;outline:none;transition:border-color .2s, box-shadow .2s
+}
+.input:focus, textarea:focus, select:focus{
+  border-color:var(--brand);box-shadow:0 0 0 3px rgba(106,140,255,.18)
+}
+
+/* ====== GALERÍA ====== */
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gallery .ph{
+  aspect-ratio:4/3;border-radius:16px;background:#f1f3ff;border:1px solid var(--stroke);
+  display:grid;place-items:center;color:#8aa1da;font-weight:600
+}
+@media (max-width:960px){.gallery{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.gallery{grid-template-columns:1fr}}
+
+/* ====== FOOTER ====== */
+footer{padding:28px 20px;text-align:center;color:#666;border-top:1px solid var(--stroke)}
+
+/* ====== ANIMACIONES SUAVES ====== */
+.reveal{opacity:0;transform:translateY(18px);transition:.7s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="narrow">
+  <div class="brand">Arteluk · <b>Arte & Arteterapia</b></div>
+  <div class="menu">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#talleres">Talleres</a>
+    <a href="#form">Contacto</a>
+  </div>
+  <a class="cta" href="#form">Escríbenos por WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section class="section hero">
+  <div class="narrow hero-wrap">
+    <div>
+      <div class="badge">Galería Cristal · Valdivia</div>
+      <h1 class="h1">Arte que acompaña, enseña y sana.</h1>
+      <p>Clases de óleo, dibujo y arteterapia para niños, jóvenes y adultos. Un espacio cálido donde la creatividad se
+        vuelve hábito y bienestar. Grupos pequeños, avances reales, acompañamiento humano.</p>
+      <div style="display:flex;gap:12px;margin-top:18px">
+        <a class="cta" href="#talleres">Ver talleres</a>
+        <a class="cta" style="background:#fff;color:#2a3;box-shadow:none;border:1px solid var(--stroke)" href="#nosotros">Conócenos</a>
+      </div>
+    </div>
+    <figure class="hero-fig" style="background:url('/img/hero-arteluk.jpg') center/cover no-repeat;"></figure>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="section">
+  <div class="narrow">
+    <div class="grid cols-2">
+      <div>
+        <h2 class="h2">Acerca de nosotros</h2>
+        <p class="lead">En Arteluk enseñamos arte con enfoque terapéutico: técnica + contención emocional. Nuestro taller es un
+          refugio creativo para aprender, disfrutar y crecer.</p>
+        <div class="card">
+          <div class="tag">Nuestra misión</div>
+          <p>Inspirar la creatividad y el bienestar en cada persona, guiando procesos artísticos simples,
+            amables y progresivos.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px">Qué vas a encontrar</h3>
+        <ul style="margin:0;padding-left:18px;color:#444">
+          <li>Clases paso a paso (básico a avanzado)</li>
+          <li>Grupos pequeños y trato cercano</li>
+          <li>Materiales guiados y seguimiento real</li>
+          <li>Ambiente terapéutico y seguro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM + FOTO -->
+<section class="section" id="form" style="background:#fdfbff">
+  <div class="narrow grid cols-2">
+    <div>
+      <h2 class="h2">¿Te interesó alguna de nuestras clases?</h2>
+      <p class="lead" style="margin-bottom:16px">Completa y te contactamos por <b>WhatsApp</b>.</p>
+      <form class="form" onsubmit="return sendForm(event)">
+        <input class="input" name="nombre" placeholder="Nombre" required>
+        <input class="input" name="apellido" placeholder="Apellido">
+        <input class="input" name="telefono" placeholder="Teléfono (con código de país)" required>
+        <label style="font-weight:600;margin:6px 0 8px;display:block">¿Qué estás buscando?</label>
+        <label style="display:block;margin-bottom:6px"><input type="checkbox" name="interes" value="hijo"> Inscribir a mi hijo/a</label>
+        <label style="display:block;margin-bottom:6px"><input type="checkbox" name="interes" value="adulto"> Clases de adulto</label>
+        <label style="display:block;margin-bottom:12px"><input type="checkbox" name="interes" value="prueba"> Quiero clase de prueba</label>
+        <textarea class="input" name="mensaje" rows="4" placeholder="Cuéntanos brevemente edad / horarios / objetivo"></textarea>
+        <button class="cta" type="submit">Enviar formulario</button>
+        <p style="color:var(--muted);font-size:.95rem;margin:10px 0 0">Nunca compartimos tus datos.</p>
+      </form>
+    </div>
+    <figure class="card" style="padding:0;overflow:hidden">
+      <img src="/img/ninos-arteluk.jpg" alt="Alumnos de Arteluk" style="width:100%;height:100%;object-fit:cover;aspect-ratio:4/3">
+    </figure>
+  </div>
+</section>
+
+<!-- TALLERES (CARDS) -->
+<section id="talleres" class="section">
+  <div class="narrow center">
+    <h2 class="h2">Talleres de arte y arteterapia</h2>
+    <p class="lead">Planes simples. Progreso visible. Acompañamiento real.</p>
+  </div>
+  <div class="narrow grid cols-3">
+    <article class="card">
+      <img src="/img/card-pintura.jpg" alt="Curso Pintura" style="border-radius:12px;margin-bottom:10px;aspect-ratio:4/3;object-fit:cover">
+      <h3 style="margin:8px 0">Curso Pintura (Adultos)</h3>
+      <p>Óleo y acrílico desde cero. Técnica, composición y color.</p>
+      <div style="display:flex;justify-content:space-between;margin-top:10px">
+        <span class="tag">$60.000 / mes</span>
+        <a class="cta" style="padding:8px 12px" href="#form">Inscribirme</a>
+      </div>
+    </article>
+    <article class="card">
+      <img src="/img/card-continuo.jpg" alt="Taller continuo" style="border-radius:12px;margin-bottom:10px;aspect-ratio:4/3;object-fit:cover">
+      <h3 style="margin:8px 0">Taller continuo (Niños)</h3>
+      <p>Dibujo, pintura y creatividad guiada. Grupos pequeños.</p>
+      <div style="display:flex;justify-content:space-between;margin-top:10px">
+        <span class="tag">$60.000 / mes</span>
+        <a class="cta" style="padding:8px 12px" href="#form">Inscribirme</a>
+      </div>
+    </article>
+    <article class="card">
+      <img src="/img/card-premium.jpg" alt="Taller Premium" style="border-radius:12px;margin-bottom:10px;aspect-ratio:4/3;object-fit:cover">
+      <h3 style="margin:8px 0">Taller Premium</h3>
+      <p>2 horas semanales + seguimiento de proyectos personales.</p>
+      <div style="display:flex;justify-content:space-between;margin-top:10px">
+        <span class="tag">$100.000 / mes</span>
+        <a class="cta" style="padding:8px 12px" href="#form">Inscribirme</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="section" style="background:#fff">
+  <div class="narrow center">
+    <h2 class="h2">Momentos Arteluk</h2>
+    <p class="lead">Un vistazo al taller y a los procesos de nuestros alumnos.</p>
+  </div>
+  <div class="narrow gallery">
+    <div class="ph" style="background:url('/img/gal-1.jpg') center/cover no-repeat">Galería 1</div>
+    <div class="ph" style="background:url('/img/gal-2.jpg') center/cover no-repeat">Galería 2</div>
+    <div class="ph" style="background:url('/img/gal-3.jpg') center/cover no-repeat">Galería 3</div>
+    <div class="ph" style="background:url('/img/gal-4.jpg') center/cover no-repeat">Galería 4</div>
+    <div class="ph" style="background:url('/img/gal-5.jpg') center/cover no-repeat">Galería 5</div>
+    <div class="ph" style="background:url('/img/gal-6.jpg') center/cover no-repeat">Galería 6</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section center" style="background:
+  radial-gradient(800px 400px at 10% 0%, rgba(158,197,255,.25), transparent 60%),
+  radial-gradient(700px 500px at 100% 60%, rgba(255,134,179,.18), transparent 60%);">
+  <div class="narrow">
+    <h2 class="h2">¿Agendamos una clase de prueba?</h2>
+    <p class="lead">Escríbenos y coordinamos día y hora. ¡Te esperamos en Galería Cristal, locales 24 y 25!</p>
+    <a class="cta" href="#form">Contactar ahora</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Arteluk — Galería Cristal (Locales 24 y 25), Valdivia · WhatsApp · Instagram
+</footer>
+
+<script>
+/* smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href'); if(id.length>1){
+      e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  })
+});
+
+/* scroll reveal */
+const io=new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.section, .card').forEach(el=>{el.classList.add('reveal'); io.observe(el);});
+
+/* form (demo): reemplaza por tu endpoint si quieres enviarlo */
+async function sendForm(ev){
+  ev.preventDefault();
+  const fd=new FormData(ev.target);
+  const data=Object.fromEntries(fd.entries());
+  alert('✅ Gracias, te contactamos por WhatsApp.\n\n' + JSON.stringify(data,null,2));
+  ev.target.reset();
+  return false;
+}
+</script>
+</body>
+</html>
